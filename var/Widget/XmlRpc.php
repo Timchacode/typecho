@@ -329,6 +329,11 @@ class XmlRpc extends Contents implements ActionInterface, Hook
         $type = isset($content['post_type']) && 'page' == $content['post_type'] ? 'page' : 'post';
 
         $input['title'] = trim($content['title']) == null ? _t('未命名文档') : $content['title'];
+        
+        // 处理自定义字段
+        if (isset($content['custom_fields']) && is_array($content['custom_fields'])) {
+            $input['fields'] = $content['custom_fields'];
+        }
 
         if (isset($content['slug'])) {
             $input['slug'] = $content['slug'];
